@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Manipulation in JS</title>
+  </head>
+  <body>
+    <div id="divId" class="main">DOM Manipulation in JavaScript</div>
+    <br /><br />
+    <button onclick="scrollWin()">Click me to scroll</button>
+    <br /><br />
+
+    <button onclick="removeHandler()">Remove EventListener</button>
+
+    <p id="demo"></p>
+
+    <ul id="items"></ul>
+  </body>
+  <script>
+    document.getElementById('divId').innerHTML = "<section><p>DOM Manipulation in JavaScript <a href='https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents' target='_blank'>Manipulating documents</a></p></section>"; //Assigning new value
+
+    var str = document.getElementsByTagName('div').value; //Get div value
+
+    var str = document.getElementsByClassName('main').value; //Get div value using class "main"
+
+    document.getElementById('divId').style.color = 'red'; //Applying css style to div
+
+    console.log('innerWidth: ' + window.innerWidth);
+    console.log('innerHeight: ' + window.innerHeight);
+    console.log('outerWidth: ' + window.outerWidth);
+    console.log('outerHeight: ' + window.outerHeight);
+    console.log('hasOwnProperty: ' + window.hasOwnProperty);
+    console.log('title: ' + window.document.title); // The document title
+    console.log('body: ' + window.document.body); // The body element
+    console.log('URL: ' + window.document.URL); // Window URL
+    console.log('all: ' + window.document.all); // all
+    console.log('documentElement: ' + document.documentElement); // documentElement
+
+    // window.scrollTo()
+    function scrollWin() {
+      window.scrollTo({
+        top: 100,
+        left: 100,
+        behavior: 'smooth'
+      });
+    }
+
+    // window.onload
+    window.onload = function() {
+      console.log('window.onload(): Window onload function called !');
+    };
+
+    document.querySelector('body').innerHTML; // Get the Content
+    document.querySelector('body').outerHTML; // Get the Content with html tag
+    console.log('className(): ' + document.querySelector('#divId').className); // Get the class name
+    console.log('classList(): ' + document.querySelector('#divId').classList); // Get all class name in array
+    console.log('attributes(): ' + document.querySelector('#divId').attributes); // Get the attributes
+
+    // querySelectorAll()
+    document.querySelectorAll('.main p'); // Get all elements matching specified selectors(s);
+
+    // querySelector()
+    document.querySelector('.main a'); // Get the main element matching specified selectors(s);
+    //document.querySelector('a').hasAttribute('target');
+    //document.querySelector('a').setAttribute('target', '_blank');
+    document.querySelector('.main').style.color = 'green';
+    document.querySelector('.main').style.backgroundColor = 'blue';
+    document.querySelector('body').classList.add('.new-class'); // Append new class
+    document.querySelector('body').classList.toggle('.new-class');
+    document.querySelector('body').classList.contains('.new-class');
+    document.querySelector('.main').style.cssText = 'padding: 1em; color: white; background-color: red;';
+
+    // getAttribute()
+    console.log('getAttribute(): ' + document.getElementById('divId').getAttribute('class'));
+
+    // setAttribute()
+    document.querySelector('.main').setAttribute('style', 'padding: 2em');
+
+    // addEventListener()
+    document.addEventListener('click', function() {
+      document.getElementById('divId').innerHTML = 'Updated Text on click !';
+    });
+
+    // removeEventListener()
+    document.querySelector('body').addEventListener('mousemove', getCoords);
+
+    function getCoords() {
+      document.getElementById('demo').innerHTML = 'X coords: ' + event.clientX + ', Y coords: ' + event.clientY;
+    }
+
+    function removeHandler() {
+      document.querySelector('body').removeEventListener('mousemove', getCoords);
+    }
+
+    // appendChild()
+    var arr = ['One', 'Two', 'Three', 'Four', 'Five'];
+    for (var i = 0; i < 5; i++) {
+      var node = document.createElement('li'); // Create a <li> node
+      var textnode = document.createTextNode(arr[i]); // Create a text node
+      node.appendChild(textnode); // Append the text to <li>
+      document.getElementById('items').appendChild(node); // Append <li> to <ul> with id="demo"
+    }
+
+    // replaceChild()
+    var textnode = document.createTextNode("Six");
+    var item = document.getElementById("items").childNodes[0];
+    item.replaceChild(textnode,item.childNodes[0]);
+
+    // removeChild()
+    var list = document.getElementById("items");   // Get the <ul> element with id="items"
+    list.removeChild(list.childNodes[1]); 
+
+    // CloneNode()
+    let clone = document.querySelector('#items').cloneNode( true );
+    clone.setAttribute( 'id', 'newId' ); // Set new Id
+    document.getElementById('items').appendChild(clone);
+    
+    // insertBefore()
+    var newItem = document.createElement("li");
+    var textnode = document.createTextNode("One");
+    newItem.appendChild(textnode);
+    var list = document.getElementById("items");
+    list.insertBefore(newItem, list.childNodes[0]);
+    
+  </script>
+</html>
