@@ -576,7 +576,7 @@ console.log("MAX : " + Math.max()); // Output: -Infinity
   var a = (b = 3);
 })();
 
-console.log("a defined? " + (typeof a !== "undefined")); // Output: true
+console.log("a defined? " + (typeof a !== "undefined")); // Output: false
 console.log("b defined? " + (typeof b !== "undefined")); // Output: true
 ```
 
